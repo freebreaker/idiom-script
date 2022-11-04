@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:123456@localhost:3306/nest"
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
+
+model g_idiom_level {
+  id           Int       @id @default(autoincrement())
+  name         String
+  sort         Int
+  matrix       String    @db.Text
+  matrix_space String    @db.Text
+  level        Int
+  createdAt    DateTime? @updatedAt @db.Timestamp()
+  deleted_at   DateTime? @updatedAt @db.Timestamp()
+  updated_at   DateTime? @updatedAt @db.Timestamp()
+}
+
+model g_idiom_words {
+  id         Int       @id @default(autoincrement())
+  name       String
+  pinyin     String
+  meaning    String
+  level_id   Int
+  createdAt  DateTime? @updatedAt @db.Timestamp()
+  deleted_at DateTime? @updatedAt @db.Timestamp()
+  updated_at DateTime? @updatedAt @db.Timestamp()
+}
+
+model g_idiom_chinese {
+  id          Int       @id @default(autoincrement())
+  word        String
+  pinyin      String
+  explanation String
+  difficult   Int?
+  createdAt   DateTime? @updatedAt @db.Timestamp()
+  deleted_at  DateTime? @updatedAt @db.Timestamp()
+  updated_at  DateTime? @updatedAt @db.Timestamp()
+}
